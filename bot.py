@@ -15,7 +15,7 @@ Press Ctrl-C on the command line or send a signal to the process to stop the
 bot.
 """
 
-import logging, random, urllib.request
+import logging, random, urllib.request, os.path, os
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler
 
@@ -36,7 +36,7 @@ reply = InlineKeyboardMarkup(kb)
 # context. Error handlers also receive the raised TelegramError object in error.
 def openurlfile(filename):
     with urllib.request.urlopen(url + '/' + filename) as uf: 
-        x = uf.read().decode('utf-8')
+        x = uf.read().decode('utf-8') 
         x = x.split('\n')
     return x
 
@@ -84,7 +84,7 @@ def politics(update, context):
     update.callback_query.message.reply_text('Выберите тему анекдота', reply_markup = reply)
 
 def catz(update, context):
-    num = random.randrange(1, 14)
+    num = random.choise(len([name for name in os.listdir(url + 'catz/') if os.path.isfile(name)]))
     coti_url = url + '/catz' + '/кот%d.jpeg' %(num)
     update.callback_query.message.bot.send_photo(chat_id = update.callback_query.message.chat.id, photo = coti_url)
     #update.callback_query.message.reply_text('Лови', photo = coti_url)
