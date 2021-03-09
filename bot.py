@@ -84,11 +84,10 @@ def politics(update, context):
     update.callback_query.message.reply_text('Выберите тему анекдота', reply_markup = reply)
 
 def catz(update, context):
-    num = random.choise([name for name in os.listdir(url + 'catz/')])
+    imya = random.choice(openurlfile('catz.txt'))
     #x = [name for name in os.listdir('./catz/')]
     #num = random.choice(x)
-    coti_url = url + 'catz/' + num 
-    print(coti_url)
+    coti_url = url + 'catz/' + imya 
     update.callback_query.message.bot.send_photo(chat_id = update.callback_query.message.chat.id, photo = coti_url)
     #update.callback_query.message.reply_text('Лови', photo = coti_url)
     update.callback_query.message.reply_text('Выберите тему анекдота', reply_markup = reply)
@@ -99,7 +98,7 @@ def main():
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
     updater = Updater("1641289734:AAG8ey-c98ORi-9BUpIIQZp31eb70mlfsGg", use_context=True)
-
+    #1641289734:AAG8ey-c98ORi-9BUpIIQZp31eb70mlfsGg
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
 
